@@ -1,13 +1,13 @@
 "use client";
 
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 interface ResultErrorProps {
-  error: Error & {digest?: string};
+  error: Error & { digest?: string };
   reset: () => void;
 }
 
-export default function ResultError({error, reset}: ResultErrorProps) {
+export default function ResultError({ error, reset }: ResultErrorProps) {
   useEffect(() => {
     console.error(error);
   }, [error]);
