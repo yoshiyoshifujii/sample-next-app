@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { Metadata } from "next";
-import ElementsForm from "@/app/components/ElementsForm";
+import ElementsForm from "@/components/features/ElementsForm";
 
 export const metadata: Metadata = {
   title: "Stripe",

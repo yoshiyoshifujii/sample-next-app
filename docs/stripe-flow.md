@@ -5,12 +5,14 @@
 ## どこで実行されるか
 
 サーバー（Next.js / Node）:
+
 - `app/stripe/page.tsx`: Server Component が初期 HTML を生成。
 - `app/actions/stripe.ts`: Server Action がシークレットキーで PaymentIntent を作成。
 - `lib/stripe.ts`: `server-only` の Stripe SDK インスタンス（`STRIPE_SECRET_KEY` を使用）。
 - `app/stripe/result/page.tsx`: PaymentIntent を取得して結果を描画する Server Component。
 
 ブラウザ（React + Stripe.js）:
+
 - `app/components/ElementsForm.tsx`: Client Component が Stripe.js を読み込みフォーム処理。
 - Stripe Elements UI と `stripe.confirmPayment(...)` はブラウザで実行。
 
