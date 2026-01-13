@@ -60,12 +60,17 @@ function CheckoutForm(props: CheckoutFormProps): JSX.Element {
 
       setPayment({ status: "processing" });
 
-      const { error: submitError } = await elements.submit();
+      const { error: submitError, selectedPaymentMethod } = await elements.submit();
 
       if (submitError) {
         setPayment({ status: "error" });
         setErrorMessage(submitError.message ?? "An unknown error occurred");
 
+        return;
+      }
+
+      if (selectedPaymentMethod === "cpmt_1Sp7U4PKU0URVzDcTLpjKqtV") {
+        // Process CPM payment on merchant server and handle redirect
         return;
       }
 
@@ -157,6 +162,15 @@ export default function ElementsForm(): JSX.Element {
         mode: "payment",
         amount: amount,
         currency: "jpy",
+        customPaymentMethods: [
+          {
+            id: "cpmt_1Sp7U4PKU0URVzDcTLpjKqtV",
+            options: {
+              type: "static",
+              subtitle: "PayPay",
+            },
+          },
+        ],
       }}
     >
       <CheckoutForm amount={amount} />

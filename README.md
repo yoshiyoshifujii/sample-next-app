@@ -4,13 +4,13 @@ Next.js App Router + Stripe の決済フローを試せるサンプルです。
 
 ## セットアップ
 
-1) 依存関係をインストール
+1. 依存関係をインストール
 
 ```bash
 pnpm install
 ```
 
-2) 環境変数を用意
+2. 環境変数を用意
 
 ```bash
 cp .env.local.example .env.local
@@ -18,7 +18,7 @@ cp .env.local.example .env.local
 
 ` .env.local` に Stripe のキーを設定してください。
 
-3) 開発サーバを起動
+3. 開発サーバを起動
 
 ```bash
 pnpm dev
