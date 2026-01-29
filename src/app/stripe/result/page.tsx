@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
+import { stripe } from "@/lib/stripe/server";
 
 interface ResultPageParams {
   searchParams?: Promise<{

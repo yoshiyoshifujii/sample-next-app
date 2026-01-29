@@ -3,7 +3,11 @@
 import React, { JSX } from "react";
 import { loadStripe, Stripe, StripeError } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { createPaymentIntent } from "@/app/actions/stripe";
+import { createPaymentIntent } from "@/lib/stripe/actions";
+import {
+  confirmCustomPaymentIntentAction,
+  createCustomPaymentIntentAction,
+} from "@/lib/customPayment/actions";
 
 interface PaymentStatusParams {
   status: string;
@@ -70,8 +74,21 @@ function CheckoutForm(props: CheckoutFormProps): JSX.Element {
       }
 
       if (selectedPaymentMethod === "cpmt_1Sp7U4PKU0URVzDcTLpjKqtV") {
-        // Process CPM payment on merchant server and handle redirect
-        return;
+        const { client_secret: clientSecret } = await createCustomPaymentIntentAction({
+          amount,
+        });
+
+        const confirmData = await confirmCustomPaymentIntentAction({
+          clientSecret,
+          returnUrl: `${window.location.origin}/custom-payment/result`,
+        });
+
+        if (confirmData.next_action?.type === "redirect" && confirmData.next_action.url) {
+          window.location.assign(confirmData.next_action.url);
+          return;
+        }
+
+        throw new Error("Custom payment confirmation did not return a redirect");
       }
 
       const { client_secret: clientSecret } = await createPaymentIntent(amount);
