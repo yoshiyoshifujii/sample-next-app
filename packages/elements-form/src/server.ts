@@ -1,8 +1,4 @@
-export type CustomPaymentStatus =
-  | "requires_confirmation"
-  | "processing"
-  | "succeeded"
-  | "failed";
+export type CustomPaymentStatus = "requires_confirmation" | "processing" | "succeeded" | "failed";
 
 export interface CustomPaymentIntent {
   id: string;
