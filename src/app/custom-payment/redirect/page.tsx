@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { JSX, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { getCustomPaymentStatusAction } from "@/lib/customPayment/actions";
 
-export default function CustomPaymentRedirectPage(): JSX.Element {
+function CustomPaymentRedirectContent(): JSX.Element {
   const searchParams = useSearchParams();
   const paymentIntentId = searchParams.get("payment_intent");
   const returnUrl = searchParams.get("return_url");
@@ -64,5 +64,13 @@ export default function CustomPaymentRedirectPage(): JSX.Element {
         </header>
       </div>
     </main>
+  );
+}
+
+export default function CustomPaymentRedirectPage(): JSX.Element {
+  return (
+    <Suspense>
+      <CustomPaymentRedirectContent />
+    </Suspense>
   );
 }

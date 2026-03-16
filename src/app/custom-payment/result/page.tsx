@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { getCustomPaymentStatusAction } from "@/lib/customPayment/actions";
 
-export default function CustomPaymentResultPage() {
+function CustomPaymentResultContent() {
   const searchParams = useSearchParams();
   const paymentIntentId = searchParams.get("payment_intent");
   const [status, setStatus] = React.useState("processing");
@@ -76,5 +76,13 @@ export default function CustomPaymentResultPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function CustomPaymentResultPage() {
+  return (
+    <Suspense>
+      <CustomPaymentResultContent />
+    </Suspense>
   );
 }
