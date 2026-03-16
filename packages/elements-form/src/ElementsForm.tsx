@@ -1,7 +1,7 @@
 "use client";
 
 import React, { JSX } from "react";
-import { Stripe, StripeError } from "@stripe/stripe-js";
+import { StripeError } from "@stripe/stripe-js";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 export interface CreatePaymentIntentResult {

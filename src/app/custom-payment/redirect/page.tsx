@@ -27,7 +27,7 @@ function CustomPaymentRedirectContent(): JSX.Element {
           window.location.assign(nextUrl.toString());
           return;
         }
-      } catch (error) {
+      } catch {
         if (isCancelled) return;
         setStatus("processing");
       }
